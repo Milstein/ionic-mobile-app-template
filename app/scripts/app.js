@@ -6,7 +6,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'IonicMobileAppTemplate.controllers'])
+angular.module('IonicMobileAppTemplate', ['ionic', 'config', 
+  'IonicMobileAppTemplate.Core.controllers','IonicMobileAppTemplate.Module.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -28,47 +29,41 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'IonicMobileAppTemp
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: 'templates/menu.html',
+      templateUrl: 'core/core.view.sidemenu.html',
       controller: 'AppCtrl'
     })
 
-    .state('app.search', {
-      url: '/search',
+    .state('app.home', {
+      url: '/home',
       views: {
         'menuContent' :{
-          templateUrl: 'templates/search.html'
+          templateUrl: 'core/core.view.home.html',
+          controller: 'CoreHomeCtrl'
         }
       }
     })
 
-    .state('app.browse', {
-      url: '/browse',
+    .state('app.settings', {
+      url: '/settings',
       views: {
         'menuContent' :{
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent' :{
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'core/core.view.settings.html',
+          controller: 'CoreSettingsCtrl'
         }
       }
     })
 
-    .state('app.single', {
-      url: '/playlists/:playlistId',
+    .state('app.module', {
+      url: '/module',
       views: {
         'menuContent' :{
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
+          templateUrl: 'module/module.view.base.html',
+          controller: 'ModuleBaseCtrl'
         }
       }
-    });
+    })
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });
 
