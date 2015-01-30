@@ -5,6 +5,7 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 		$scope.debug = undefined;
 		hello.init({
 	      facebook : '350686555119014',
+	      twitter : 'U9smkVu9v8rmhtVAebAm0KFa8',
 	    }, {
 
 	      // Define the OAuth2 return URL
@@ -21,9 +22,18 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	        hello.on('auth.login', function(auth){
 	          // call user information, for the given network
 	          hello( auth.network ).api( '/me' ).then( function(facebookUserObject){
-	            console.log(facebookUserObject.name);
-	            console.log(facebookUserObject);
-	            $localstorage.setObject('profilePhoto', facebookUserObject);
+	            $scope.debug = facebookUserObject;
+	          });
+	        });
+	      });
+	    };
+
+	    $scope.twitterLogin = function() {
+	      hello('twitter').login(function() {
+	        hello.on('auth.login', function(auth){
+	          // call user information, for the given network
+	          hello( auth.network ).api( '/me' ).then( function(twitterUserObject){
+	            $scope.debug = twitterUserObject;
 	          });
 	        });
 	      });
