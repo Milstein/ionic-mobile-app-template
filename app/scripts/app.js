@@ -1,4 +1,6 @@
 'use strict';
+
+
 // Ionic Starter App, v0.9.20
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -6,10 +8,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('IonicMobileAppTemplate', ['ionic', 'config', 
-  'IonicMobileAppTemplate.Core.controllers','IonicMobileAppTemplate.Module.controllers'])
+angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
+  'IonicMobileAppTemplate.Core.controllers', 'IonicMobileAppTemplate.Core.services',
+  'IonicMobileAppTemplate.Module.controllers'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaSQLite, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +23,21 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config',
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // setup database object
+    var db;
+    if (window.cordova){
+      db = $cordovaSQLite.openDB({name: 'my.db'}); //device
+    } else {
+      db = window.openDatabase('my.db', '1', 'my', 1024 * 1024 * 100); // browser
+    }
+
+    // initialize database tables
+    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)');
+
+    // save database object to $rootScope
+    $rootScope.db = db;
+
   });
 })
 
@@ -61,7 +79,7 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config',
           controller: 'ModuleBaseCtrl'
         }
       }
-    })
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
