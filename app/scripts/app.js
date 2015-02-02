@@ -12,7 +12,7 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
   'IonicMobileAppTemplate.Core.controllers', 'IonicMobileAppTemplate.Core.services',
   'IonicMobileAppTemplate.Module.controllers'])
 
-.run(function($ionicPlatform, $cordovaSQLite, $rootScope) {
+.run(function($ionicPlatform, $cordovaSQLite, $rootScope, AppSettingsServ) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -32,8 +32,8 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
       db = window.openDatabase('my.db', '1', 'my', 1024 * 1024 * 100); // browser
     }
 
-    // initialize database tables
-    $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)');
+    // initialize settings
+    AppSettingsServ.init(db);
 
     // save database object to $rootScope
     $rootScope.db = db;

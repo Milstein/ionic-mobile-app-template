@@ -6,34 +6,6 @@
     <h1>Home</h1>
     <button ng-click="facebookLogin()">Facebook Test</button>
     <button ng-click="twitterLogin()">Twitter Test</button>
-    <div>
-    	<form ng-submit="insert(user.firstname, user.lastname)">
-      		<div class="list">
-        		<p>Add New User:</p>
-		        <label class="item item-input">
-		          	<input type="text" ng-model="user.firstname" placeholder="firstname">
-		        </label>
-		        <label class="item item-input">
-		          	<input type="text" ng-model="user.lastname" placeholder="lastname">
-		      	</label>
-      			<label class="item">
-	      			<button class="button button-block button-positive" type="submit">Insert</button>
-	    		  </label>
-      		</div>
-		  </form>
-      <form ng-submit="select(query)">
-          <div class="list">
-            <p>Find User:</p>
-            <label class="item item-input">
-                <input type="text" ng-model="query" placeholder="search">
-            </label>
-            <label class="item">
-              <button class="button button-block button-positive" type="submit">Find</button>
-            </label>
-          </div>
-      </form>
-    </div>
-    Result: {{result}}
     {{debug}}
   </ion-content>
 </ion-view>

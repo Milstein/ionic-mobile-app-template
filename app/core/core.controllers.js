@@ -17,9 +17,6 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 
 	.controller('CoreHomeCtrl', ['$scope', '$cordovaSQLite', '$localstorage', function($scope, $cordovaSQLite, $localstorage){
 		$scope.debug;
-		$scope.user;
-		$scope.query;
-		$scope.result;
 
 		var db = $scope.db;
 
@@ -45,35 +42,31 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	      });
 	    };
 
-		$scope.insert = function(firstname, lastname) {
-	        var query = "INSERT INTO people (firstname, lastname) VALUES (?,?)";
-	        $cordovaSQLite.execute(db, query, [firstname, lastname]).then(function(res) {
-	            $scope.result = res.insertId;
-	            console.log("INSERT ID -> " + res.insertId);
-	        }, function (err) {
-	        	$scope.result = err;
-	            console.error(err);
-	        });
-	    }
-	 
-	    $scope.select = function(lastname) {
-	        var query = "SELECT firstname, lastname FROM people WHERE lastname = ?";
-	        $cordovaSQLite.execute(db, query, [lastname]).then(function(res) {
-	            if(res.rows.length > 0) {
-	            	$scope.result = {firstname: res.rows.item(0).firstname, lastname: res.rows.item(0).lastname};
-	                console.log("SELECTED -> " + res.rows.item(0).firstname + " " + res.rows.item(0).lastname);
-	            } else {
-	            	$scope.result = "No results found";
-	                console.log("No results found");
-	            }
-	        }, function (err) {
-	        	$scope.result = err;
-	            console.error(err);
-	        });
-	    }
-
 	}])
 
-	.controller('CoreSettingsCtrl', ['$scope', function($scope){
+	.controller('CoreSettingsCtrl', ['$scope', '$state', 'AppSettingsServ', function($scope, $state, AppSettingsServ){
 		$scope.debug = undefined;
+		$scope.settings = {};
+
+		AppSettingsServ.getAllSettings(function(err, settings){
+			if(err){
+				$scope.debug = err;
+				console.log('got err', err);
+			} else {
+				$scope.settings = settings;
+				console.log('got settings', settings);
+			}
+		});
+
+		$scope.saveSettings = function(settings){
+			AppSettingsServ.setAllSettings(settings);
+			console.log('settings saved');
+			$state.go('app.home');
+		};
+
+		$scope.cancelSettings = function() {
+			console.log('settings not saved');
+			$state.go('app.home');
+		};
+
 	}]);
