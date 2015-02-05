@@ -71,6 +71,14 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	    	});
 	    };
 
+	   	$scope.goHome = function() {
+			$state.go('app.home');
+		};
+
+		$scope.goSettings = function() {
+			$state.go('app.settings');
+		};
+
 	}])
 
 	.controller('CoreSettingsCtrl', ['$scope', '$state', 'AppSettingsServ', function($scope, $state, AppSettingsServ){
@@ -97,6 +105,8 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 			console.log('settings not saved');
 			$state.go('app.home');
 		};
+
+
 
 	}])
 

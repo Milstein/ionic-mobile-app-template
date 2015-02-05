@@ -40,8 +40,8 @@
 
         <div class="item item-thumbnail-left">
           <img ng-src="{{socialProfile.thumbnail}}">
-          <h2>{{socialProfile.name}}</h2>
-          <p>{{socialProfile.thumbnail}}</p>
+          <h2>Name</h2>
+          <p>{{socialProfile.name}}</p>
         </div>
         <div class="item">
           <h2>ID</h2>
@@ -71,4 +71,8 @@
 
     </div>
   </ion-content>
+  <ion-footer-bar>
+    <a class="button icon ion-home button-clear button-dark" ng-click="goHome()"></a>
+    <a class="button icon ion-gear-a button-clear button-dark" ng-click="goSettings()"></a>
+  </ion-footer-bar>
 </ion-view>
