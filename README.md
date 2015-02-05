@@ -15,8 +15,19 @@ Features:
 
 Update your package list
 
-'''
+```bash
 sudo apt-get update
-'''
+```
 
+Download GIT if you don't have it
+
+```bash
+sudo apt-get install -y git
+```
+
+Install Node Package Manager (npm)
+
+```bash
+sudo apt-get install npm
+```
 
