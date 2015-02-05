@@ -8,27 +8,65 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 
 	}])
 
-	.controller('CoreHomeCtrl', ['$scope', '$state', 'User', function($scope, $state, User){
+	.controller('CoreHomeCtrl', ['$scope', '$state', '$stateParams', 'User', function($scope, $state, $stateParams, User){
 		$scope.isFacebookSync = User.isLoggedIn('facebook');
 		$scope.isTwitterSync = User.isLoggedIn('twitter');
+		$scope.profileView = false;
 		$scope.socialProfile = {};
+		$scope.debug = 'all is good';
 
 		$scope.socialLogin = function(network) {
 			User.socialLogin(network, function(err){
 				if(err){
 					console.log(err);
 				} else {
-					$state.go($state.current, {}, {reload: true});
+
+					if(network == 'facebook'){
+						$scope.isFacebookSync = true;
+					}
+
+					if(network == 'twitter'){
+						$scope.isTwitterSync = true;
+					}
+
+					$scope.$apply();
+					//$state.go($state.current, {}, {reload: true});
 				}
 			});
 	    };
 
 	    $scope.viewSocialProfile = function(network) {
+	    	$scope.debug = 'start view social profile';
 	    	User.getSocialProfile(network, function(err, userObject){
 	    		if(err){
 	    			console.log(err);
 	    		} else {
-	    			$scope.socialProfile = userObject;
+	    			$scope.debug = 'got profile for ' + network;
+	    			console.log('userObject', userObject);
+
+
+	    			if(network == 'facebook'){
+	    				$scope.socialProfile.id = userObject.id;
+	    				$scope.socialProfile.name = userObject.name;
+	    				$scope.socialProfile.thumbnail = userObject.picture;
+	    				$scope.socialProfile.screenName = userObject.username;
+	    				$scope.socialProfile.firstName = userObject.first_name;
+	    				$scope.socialProfile.lastName = userObject.last_name;
+	    				$scope.socialProfile.language = userObject.locale;
+	    			}
+
+	    			if (network == 'twitter'){
+	    				$scope.socialProfile.id = userObject.id;
+	    				$scope.socialProfile.name = userObject.screen_name;
+	    				$scope.socialProfile.thumbnail = userObject.thumbnail;
+	    				$scope.socialProfile.screenName = userObject.screenName;
+	    				$scope.socialProfile.firstName = userObject.first_name;
+	    				$scope.socialProfile.lastName = userObject.last_name;
+	    				$scope.socialProfile.language = userObject.lang;
+	    			}
+
+	    			$scope.profileView = true;
+	    			$scope.$apply();
 	    		}
 	    	});
 	    };
