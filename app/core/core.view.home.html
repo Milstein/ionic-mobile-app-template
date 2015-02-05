@@ -4,8 +4,20 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <h1>Home</h1>
-    <button ng-click="facebookLogin()">Facebook Test</button>
-    <button ng-click="twitterLogin()">Twitter Test</button>
-    {{debug}}
+    <div ng-if="!isFacebookSync">
+		<button ng-click="socialLogin('facebook')">Facebook Test</button>
+    </div>
+    <div ng-if="!isTwitterSync">
+    	<button ng-click="socialLogin('twitter')">Twitter Test</button>
+    </div>
+    <div ng-if="isFacebookSync">
+		<button ng-click="viewSocialProfile('facebook')">View Facebook Profile</button>
+    </div>
+    <div ng-if="isTwitterSync">
+    	<button ng-click="viewSocialProfile('twitter')">View Twitter Profile</button>
+    </div>
+    <div ng-if="isFacebookSync || isTwitterSync">
+    	Social Profile: {{socialProfile}}
+    </div>
   </ion-content>
 </ion-view>

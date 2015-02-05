@@ -1,45 +1,36 @@
 'use strict';
 angular.module('IonicMobileAppTemplate.Core.controllers', [])
 
-	.controller('AppCtrl', ['$scope', function($scope){
+	.controller('AppCtrl', ['$scope', 'User', function($scope, User){
 		$scope.debug = undefined;
 
-		hello.init({
-	      facebook : '350686555119014',
-	      twitter : 'U9smkVu9v8rmhtVAebAm0KFa8',
-	    }, {
+		User.initSocial();
 
-	      // Define the OAuth2 return URL
-	      redirect_uri : 'http://127.0.0.1:8080/',
-	      oauth_proxy: ' https://auth-server.herokuapp.com/proxy'
-	    });
 	}])
 
-	.controller('CoreHomeCtrl', ['$scope', '$cordovaSQLite', '$localstorage', function($scope, $cordovaSQLite, $localstorage){
-		$scope.debug;
+	.controller('CoreHomeCtrl', ['$scope', '$state', 'User', function($scope, $state, User){
+		$scope.isFacebookSync = User.isLoggedIn('facebook');
+		$scope.isTwitterSync = User.isLoggedIn('twitter');
+		$scope.socialProfile = {};
 
-		var db = $scope.db;
-
-		$scope.facebookLogin = function() {
-	      hello('facebook').login(function() {
-	        hello.on('auth.login', function(auth){
-	          // call user information, for the given network
-	          hello( auth.network ).api( '/me' ).then( function(facebookUserObject){
-	            $scope.debug = facebookUserObject;
-	          });
-	        });
-	      });
+		$scope.socialLogin = function(network) {
+			User.socialLogin(network, function(err){
+				if(err){
+					console.log(err);
+				} else {
+					$state.go($state.current, {}, {reload: true});
+				}
+			});
 	    };
 
-	    $scope.twitterLogin = function() {
-	      hello('twitter').login(function() {
-	        hello.on('auth.login', function(auth){
-	          // call user information, for the given network
-	          hello( auth.network ).api( '/me' ).then( function(twitterUserObject){
-	            $scope.debug = twitterUserObject;
-	          });
-	        });
-	      });
+	    $scope.viewSocialProfile = function(network) {
+	    	User.getSocialProfile(network, function(err, userObject){
+	    		if(err){
+	    			console.log(err);
+	    		} else {
+	    			$scope.socialProfile = userObject;
+	    		}
+	    	});
 	    };
 
 	}])
@@ -68,5 +59,11 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 			console.log('settings not saved');
 			$state.go('app.home');
 		};
+
+	}])
+
+	.controller('CoreProfileCtrl', ['$scope', '$localstorage', function($scope, $localstorage){
+		$scope.debug = undefined;
+		$scope.user = $localstorage.getObject('user');
 
 	}]);

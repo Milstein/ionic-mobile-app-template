@@ -9,8 +9,12 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
+  'IonicMobileAppTemplate.models.User',
   'IonicMobileAppTemplate.Core.controllers', 'IonicMobileAppTemplate.Core.services',
   'IonicMobileAppTemplate.Module.controllers'])
+
+// add lodash for use in controllers, unit test
+.constant('_', window._)
 
 .run(function($ionicPlatform, $cordovaSQLite, $rootScope, AppSettingsServ) {
   $ionicPlatform.ready(function() {
@@ -37,6 +41,9 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
 
     // save database object to $rootScope
     $rootScope.db = db;
+
+    // attach lodash to rootScope for use in views
+    $rootScope._ = window._;
 
   });
 })
@@ -67,6 +74,16 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
         'menuContent' :{
           templateUrl: 'core/core.view.settings.html',
           controller: 'CoreSettingsCtrl'
+        }
+      }
+    })
+
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        'menuContent' :{
+          templateUrl: 'core/core.view.profile.html',
+          controller: 'CoreProfileCtrl'
         }
       }
     })
