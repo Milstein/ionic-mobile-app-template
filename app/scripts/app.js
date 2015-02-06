@@ -78,16 +78,6 @@ angular.module('IonicMobileAppTemplate', ['ionic', 'config', 'ngCordova',
       }
     })
 
-    .state('app.profile', {
-      url: '/profile',
-      views: {
-        'menuContent' :{
-          templateUrl: 'core/core.view.profile.html',
-          controller: 'CoreProfileCtrl'
-        }
-      }
-    })
-
     .state('app.module', {
       url: '/module',
       views: {

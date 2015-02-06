@@ -38,6 +38,7 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	    $scope.viewSocialProfile = function(network) {
 	    	$scope.debug = 'start view social profile';
 	    	User.getSocialProfile(network, function(err, userObject){
+
 	    		if(err){
 	    			console.log(err);
 	    		} else {
@@ -49,7 +50,7 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	    				$scope.socialProfile.id = userObject.id;
 	    				$scope.socialProfile.name = userObject.name;
 	    				$scope.socialProfile.thumbnail = userObject.picture;
-	    				$scope.socialProfile.screenName = userObject.username;
+	    				$scope.socialProfile.screenName = userObject.link;
 	    				$scope.socialProfile.firstName = userObject.first_name;
 	    				$scope.socialProfile.lastName = userObject.last_name;
 	    				$scope.socialProfile.language = userObject.locale;
@@ -57,9 +58,9 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 
 	    			if (network == 'twitter'){
 	    				$scope.socialProfile.id = userObject.id;
-	    				$scope.socialProfile.name = userObject.screen_name;
+	    				$scope.socialProfile.name = userObject.name;
 	    				$scope.socialProfile.thumbnail = userObject.thumbnail;
-	    				$scope.socialProfile.screenName = userObject.screenName;
+	    				$scope.socialProfile.screenName = userObject.screen_name;
 	    				$scope.socialProfile.firstName = userObject.first_name;
 	    				$scope.socialProfile.lastName = userObject.last_name;
 	    				$scope.socialProfile.language = userObject.lang;
