@@ -59,17 +59,6 @@ grunt init
 ```
 
 
-Download Cordova packages
-
-```bash
-cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
-cordova plugin add org.apache.cordova.statusbar
-cordova plugin add org.apache.cordova.console
-cordova plugin add org.apache.cordova.inappbrowser
-cordova plugin add https://github.com/brodysoft/Cordova-SQLitePlugin.git
-```
-
-
 Install Android platform
 
 ```bash
