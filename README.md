@@ -35,6 +35,7 @@ npm install -g bower
 npm install -g grunt-cli
 ```
 
+
 Clone the project and navigate into it
 
 ```bash
@@ -42,12 +43,21 @@ git clone https://github.com/castlewhitehall/ionic-mobile-app-template.git
 cd ionic-mobile-app-template/
 ```
 
+
 Download required libraries
 
 ```bash
 npm install
 bower install
 ```
+
+
+Initialize the project
+
+```bash
+grunt init
+```
+
 
 Download Cordova packages
 
@@ -59,19 +69,23 @@ cordova plugin add org.apache.cordova.inappbrowser
 cordova plugin add https://github.com/brodysoft/Cordova-SQLitePlugin.git
 ```
 
+
 Install Android platform
 
 ```bash
 cordova platform add android
 ```
 
+
 Run on attached Android device
+
 
 ```bash
 grunt run:android
 ```
 
 Host locally to debug/develop in browser (Note: cordova plugins and social media will not work in browser)
+
 
 ```bash
 grunt serve
