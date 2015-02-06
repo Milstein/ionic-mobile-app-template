@@ -13,13 +13,20 @@ Features:
 
 ## Android
 
-Update the local package list and download GIT and Node Package Manager(npm) 
+Update the local package list and download GIT and Node.js 
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y git
-sudo apt-get install -y npm
+sudo apt-get install -y nodejs
 ```
+
+Create a symbolic link between nodejs and node (some older programs that use node call it through 'node' instead of 'nodejs')
+
+```bash
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+```
+
 
 Install Bower Web Package Manager and Grunt Task Runner
 
