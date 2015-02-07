@@ -25,12 +25,13 @@ android
 
 
 
-Update the local package list and download GIT and Node.js 
+Update the local package list and download GIT, Node.js, and Node Package Manager
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y git
 sudo apt-get install -y nodejs
+sudo apt-get install -y npm
 ```
 
 Create a symbolic link between nodejs and node (some older programs that use node call it through 'node' instead of 'nodejs')
