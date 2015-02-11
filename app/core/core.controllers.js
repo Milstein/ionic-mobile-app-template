@@ -76,6 +76,17 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	    	});
 	    };
 
+
+	   	$scope.goHome = function() {
+	   		console.log('going to home');
+			$state.go('app.home');
+		};
+
+		$scope.goSettings = function() {
+			console.log('going to settings');
+			$state.go('app.settings');
+		};
+
 		var posOptions = {timeout: 10000, enableHighAccuracy: false};
 	    $interval(function(){
 		  	$cordovaGeolocation
@@ -87,16 +98,6 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 		      		console.log(err);
 		    	});
 	    }, 5000);
-
-
-
-	   	$scope.goHome = function() {
-			$state.go('app.home');
-		};
-
-		$scope.goSettings = function() {
-			$state.go('app.settings');
-		};
 
 	}])
 
