@@ -7,6 +7,7 @@ Features:
 * A Sample Module for demonstration
 * Persisting local storage through SQLite
 * Facebook and Twitter social media syncronization
+* GPS location information
 
 
 # Setup Instructions
