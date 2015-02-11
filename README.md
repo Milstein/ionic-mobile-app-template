@@ -1,6 +1,6 @@
 # Ionic-mobile-app-template
 
-This is a template application for the [Ionic Framework](http://ionicframework.com/). It was originally generated using this [Yeoman](http://yeoman.io/) [Ionic generator](https://github.com/diegonetto/generator-ionic) version 0.6.1 on January 29th, 2015. It is meant to be a template and starting point for Ionic mobile applications.
+This is a template application for the [Ionic Framework](http://ionicframework.com/). It was originally generated using this [Yeoman](http://yeoman.io/) [Ionic generator](https://github.com/diegonetto/generator-ionic) version 0.6.1 on January 29th, 2015. It is meant to be a template and starting point for Ionic mobile applications. This project was originally sponsored and supported by [Antonio Berrios](https://github.com/aberrios85).
 
 Features:
 * Core module which includes applicaion settings
