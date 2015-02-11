@@ -1,5 +1,8 @@
 'use strict';
 
+//TODO:
+//  -- Protect against SQL injection
+
 angular.module('IonicMobileAppTemplate.Core.services', [])
 
 	.factory('AppSettingsServ', ['$cordovaSQLite', function($cordovaSQLite){

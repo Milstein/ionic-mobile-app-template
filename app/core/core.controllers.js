@@ -8,12 +8,16 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 
 	}])
 
-	.controller('CoreHomeCtrl', ['$scope', '$state', '$stateParams', 'User', function($scope, $state, $stateParams, User){
+	.controller('CoreHomeCtrl', ['$scope', '$state', '$stateParams', '$cordovaGeolocation', '$interval', 'User', function($scope, $state, $stateParams, $cordovaGeolocation, $interval, User){
 		$scope.isFacebookSync = User.isLoggedIn('facebook');
 		$scope.isTwitterSync = User.isLoggedIn('twitter');
 		$scope.profileView = false;
 		$scope.socialProfile = {};
 		$scope.debug = 'all is good';
+		$scope.myLat = 0;
+		$scope.myLng = 0;
+
+
 
 		$scope.socialLogin = function(network) {
 			User.socialLogin(network, function(err){
@@ -71,6 +75,20 @@ angular.module('IonicMobileAppTemplate.Core.controllers', [])
 	    		}
 	    	});
 	    };
+
+		var posOptions = {timeout: 10000, enableHighAccuracy: false};
+	    $interval(function(){
+		  	$cordovaGeolocation
+		  		.getCurrentPosition(posOptions)
+		  		.then(function (position) {
+		      		$scope.myLat = position.coords.latitude;
+		      		$scope.myLng = position.coords.longitude;
+		    	}, function(err) {
+		      		console.log(err);
+		    	});
+	    }, 5000);
+
+
 
 	   	$scope.goHome = function() {
 			$state.go('app.home');

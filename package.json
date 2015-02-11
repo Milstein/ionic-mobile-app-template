@@ -51,6 +51,7 @@
     "org.apache.cordova.statusbar",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "https://github.com/brodysoft/Cordova-SQLitePlugin.git"
+    "https://github.com/brodysoft/Cordova-SQLitePlugin.git",
+    "org.apache.cordova.geolocation"
   ]
 }
